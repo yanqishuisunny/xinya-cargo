@@ -1,0 +1,33 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongodb.test.svc.cluster.local:27017/ail-location
+  datasource:
+    url: jdbc:mysql://mysql-svc.test.svc.cluster.local:3306/cargo_evaluate?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: xsun_group
+    password: 1iDnwwKq2QNRfD9N
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 10.10.10.222:26379,10.10.10.222:26380,10.10.10.222:26381
+    database: 10
+  rabbitmq:
+    addresses: rabbitmq-svc.test.svc.cluster.local
+    port: 61613
+    username: user
+    password: password
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.10.10.221:8848 #服务注册中心地址
+        ephemeral: true
+        namespace: 77c3fbf5-d280-494e-835d-285640fcc9d4
+xinya-external: http://external-svc.test.svc.cluster.local:8080
+xinya-message: http://message-svc.test.svc.cluster.local:8080
+aliyun:
+  oss:
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    accessKeyId: LTAI4ooYJrYiSuKj
+    accessKeySecret: 15PsOAAV9bRYavpG4qFs8r4pKhpskj
+    bucketName: test-xinya
+    accessDomainName: http://test-oss.xsungroup.cn/

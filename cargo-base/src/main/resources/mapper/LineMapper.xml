@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.car.mapper.LineMapper">
+
+    <select id="queryForList" resultType="com.cargo.car.vo.LineVo">
+        select * from line where is_able = 1
+        and create_user = #{userId}
+
+
+    </select>
+    <select id="queryForOne" resultType="com.cargo.car.vo.LineVo">
+        select * from line where is_able = 1
+        and line_id = #{id}
+
+    </select>
+</mapper>

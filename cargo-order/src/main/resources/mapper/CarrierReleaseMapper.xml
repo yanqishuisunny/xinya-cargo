@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.order.mapper.CarrierReleaseMapper">
+    <resultMap id="CarrierReleaseVoResultMap" type="com.cargo.order.vo.CarrierReleaseVo">
+        <id column="carrier_release_id" property="carrierReleaseId" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="line_sender_area_province_id" property="lineSenderAreaProvinceId" jdbcType="VARCHAR" />
+        <result column="line_sender_area_province_name" property="lineSenderAreaProvinceName" jdbcType="VARCHAR" />
+        <result column="line_sender_area_city_id" property="lineSenderAreaCityId" jdbcType="VARCHAR" />
+        <result column="line_sender_area_city_name" property="lineSenderAreaCityName" jdbcType="VARCHAR" />
+        <result column="line_sender_area_town_id" property="lineSenderAreaTownId" jdbcType="VARCHAR" />
+        <result column="line_sender_area_town_name" property="lineSenderAreaTownName" jdbcType="VARCHAR" />
+        <result column="line_delivery_area_province_id" property="lineDeliveryAreaProvinceId" jdbcType="VARCHAR" />
+        <result column="line_delivery_area_province_name" property="lineDeliveryAreaProvinceName" jdbcType="VARCHAR" />
+        <result column="line_delivery_area_city_id" property="lineDeliveryAreaCityId" jdbcType="VARCHAR" />
+        <result column="line_delivery_area_city_name" property="lineDeliveryAreaCityName" jdbcType="VARCHAR" />
+        <result column="line_delivery_area_town_id" property="lineDeliveryAreaTownId" jdbcType="VARCHAR" />
+        <result column="line_delivery_area_town_name" property="lineDeliveryAreaTownName" jdbcType="VARCHAR" />
+        <result column="carrier_start_time" property="carrierStartTime" jdbcType="INTEGER" />
+        <result column="carrier_end_time" property="carrierEndTime" jdbcType="INTEGER" />
+        <result column="line_price" property="linePrice" jdbcType="INTEGER" />
+        <result column="carrier_remark" property="carrierRemark" jdbcType="VARCHAR" />
+        <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+        <result column="price_type_id" property="priceTypeId" jdbcType="VARCHAR" />
+
+        <collection property="carrierCarsVoList" ofType="com.cargo.order.vo.CarVo" column="{carrierReleaseId=carrier_release_id}" select="getCars"/>
+    </resultMap>
+    <resultMap id="carsMap" type="com.cargo.order.entity.CarEntity">
+        <result column="car_id" property="carId" jdbcType="VARCHAR" />
+        <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+        <result column="car_card_type_id" property="carCardTypeId" jdbcType="VARCHAR" />
+        <result column="car_energy_type_id" property="carEnergyTypeId" jdbcType="VARCHAR" />
+        <result column="car_type_id" property="carTypeId" jdbcType="VARCHAR" />
+        <result column="car_size_id" property="carSizeId" jdbcType="VARCHAR" />
+        <result column="car_load_weight" property="carLoadWeight" jdbcType="INTEGER" />
+        <result column="license_home_url" property="licenseHomeUrl" jdbcType="VARCHAR" />
+        <result column="license_front_url" property="licenseFrontUrl" jdbcType="VARCHAR" />
+        <result column="license_back_url" property="licenseBackUrl" jdbcType="VARCHAR" />
+        <result column="road_transport_url" property="roadTransportUrl" jdbcType="VARCHAR" />
+        <result column="car_front_url" property="carFrontUrl" jdbcType="VARCHAR" />
+        <result column="car_back_url" property="carBackUrl" jdbcType="VARCHAR" />
+        <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    </resultMap>
+    <update id="updateByListIds">
+        update carrier_release con
+        set con.is_able = 0 where con.carrier_release_id in
+        <foreach item="item" collection="ids" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+
+    <select id="queryForList" resultMap="CarrierReleaseVoResultMap">
+        select *  from carrier_release con
+        where con.is_able = 1
+        <if test="carRel.status != null and carRel.status !=''">
+            and con.status = #{carRel.status}
+        </if>
+        <if test="carRel.createUser != null and carRel.createUser !=''">
+            and con.create_user = #{carRel.createUser}
+        </if>
+        <if test="carRel.carrierSenderAdCode != null and carRel.carrierSenderAdCode !=''">
+            and con.line_sender_area_town_id = #{carRel.carrierSenderAdCode}
+        </if>
+        <if test="carRel.carrierDeliveryAdCode != null and carRel.carrierDeliveryAdCode !=''">
+            and con.line_delivery_area_town_id = #{carRel.carrierDeliveryAdCode}
+        </if>
+
+    </select>
+    <select id="queryForOne" resultMap="CarrierReleaseVoResultMap">
+        select * from carrier_release con
+        where con.is_able = 1
+        <if test="id != null and id !=''">
+            and con.carrier_release_id = #{id}
+        </if>
+    </select>
+    <select id="getCars" resultMap="carsMap" >
+        select * from carrier_cars g
+        where g.is_able = 1
+       and g.carrier_release_id = #{carrierReleaseId}
+
+    </select>
+
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.car.mapper.CarMapper">
+
+
+    <select id="queryForList" resultType="com.cargo.car.vo.CarVo">
+        select * from car where is_able = 1
+        <if test="dto.carNo != null and dto.carNo !=''">
+            AND car_no like concat('%',#{dto.carNo},'%')
+        </if>
+
+        <if test="dto.carTypeId != null and dto.carTypeId !=''">
+            AND car_type_id = #{dto.carTypeId}
+        </if>
+
+        <if test="dto.auditStatus != null and dto.auditStatus !=''">
+            AND audit_status = #{dto.auditStatus}
+        </if>
+
+        <if test="dto.shareStatus != null and dto.shareStatus !=''">
+            AND share_status = #{dto.shareStatus}
+        </if>
+        <if test="dto.createUser != null and dto.createUser !=''">
+            AND create_user = #{dto.createUser}
+        </if>
+    </select>
+    <select id="carMessageToRedis" resultType="com.cargo.car.vo.CarMessageVo">
+        SELECT
+            c.*,
+            s.org_id,
+            s.org_name,
+            cc.car_card_type_name,
+            ct.car_type_name,
+            cs.car_size_name
+            FROM
+            car c
+            INNER JOIN (
+            SELECT
+            ta.org_id,
+            tt.org_name,
+            cu.user_id
+            FROM
+            t_org_user_association ta
+            LEFT JOIN c_user_info cu ON cu.user_id = ta.user_id
+            LEFT JOIN t_org tt ON tt.org_id = ta.org_id
+            WHERE
+            ta.is_able = 1
+            AND ta.org_id = #{orgId}
+
+            ) s ON s.user_id = c.create_user
+            LEFT JOIN car_card_type cc ON cc.car_card_type_id = c.car_card_type_id
+            LEFT JOIN car_type ct ON ct.car_type_id = c.car_type_id
+            LEFT JOIN car_size cs ON cs.car_size_id = c.car_size_id
+            WHERE
+            c.is_able = 1
+            ORDER BY
+            c.gmt_create DESC
+    </select>
+    <select id="hours" resultType="com.cargo.car.vo.CarInCountVo">
+        SELECT
+            count( 1 ) AS count,
+          date_format( gmt_create, "%Y%m%d%H" ) AS hour
+        FROM
+            car
+        <where>
+            <if test="start != null and end != null">
+                gmt_create between #{start} and  #{end}
+            </if>
+        </where>
+        GROUP BY
+        hour
+        ORDER BY
+        hour DESC
+    </select>
+    <select id="days" resultType="com.cargo.car.vo.CarInCountVo">
+
+        SELECT
+            count( 1 ) AS count,
+            date_format( gmt_create, "%Y%m%d" ) AS day
+        FROM
+            car
+            <where>
+            <if test="start != null and end != null">
+                gmt_create between #{start} and  #{end}
+            </if>
+
+            </where>
+
+        GROUP BY
+         day
+        ORDER BY
+         day DESC
+    </select>
+
+    <select id="months" resultType="com.cargo.car.vo.CarInCountVo">
+
+        SELECT
+            count( 1 ) AS count,
+            date_format( gmt_create, "%Y%m" ) AS month
+        FROM
+            car
+        <where>
+            <if test="start != null and end != null">
+                gmt_create between #{start} and  #{end}
+            </if>
+
+        </where>
+        GROUP BY
+            month
+        ORDER BY
+            month DESC
+    </select>
+</mapper>

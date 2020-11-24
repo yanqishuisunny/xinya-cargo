@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.order.mapper.GeneralOrderMapper">
+
+    <select id="queryForList" resultType="com.cargo.order.vo.GeneralOrderVo">
+        select * from general_order ord
+        where ord.is_able = 1
+        <if test="dto.loginUserId != null and dto.loginUserId != ''">
+            and (ord.from_user_id = #{dto.loginUserId} or ord.to_user_id = #{dto.loginUserId})
+        </if>
+        <if test="dto.generalOrderStatus != null and dto.generalOrderStatus != ''">
+            and ord.general_order_status = #{dto.generalOrderStatus}
+        </if>
+        <if test="dto.generalDispatchStatus != null and dto.generalDispatchStatus != ''">
+            and ord.general_dispatch_status = #{dto.generalDispatchStatus}
+        </if>
+        order by ord.gmt_create desc
+    </select>
+    <select id="queryForOne" resultType="com.cargo.order.vo.GeneralOrderVo">
+        select * from general_order ord
+        where ord.is_able = 1
+        and ord.general_order_id = #{id}
+    </select>
+    <select id="selectDetails" resultType="com.cargo.order.vo.GeneralOrderDetailVo">
+        select ord.*, gog.goods_name from general_order ord
+        left join general_order_goods gog on gog.general_order_id = ord.general_order_id
+        where ord.is_able = 1 and
+        ord.general_order_id IN
+        <foreach collection="t" item="t" index="index" open="(" separator="," close=")">
+            #{t}
+        </foreach>
+    </select>
+    <select id="getWayBillByGenId" resultType="com.cargo.order.vo.GeneralOrderWayBillVo">
+        select ord.*,gog.* from general_order ord
+        left join t_waybill way on ord.general_order_id = way.general_order_id
+        left join general_order_goods gog on gog.general_order_id = ord.general_order_id
+        where ord.is_able = 1
+    </select>
+</mapper>

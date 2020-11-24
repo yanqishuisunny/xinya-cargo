@@ -1,0 +1,22 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://10.10.10.221:27018/ail-location
+  datasource:
+    url: jdbc:mysql://10.10.10.212:4306/xsun_gps?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: xsun_group
+    password: 1iDnwwKq2QNRfD9N
+  redis:
+    database: 2
+    host: 172.20.200.204
+swagger:
+  enable: true
+jimi:
+  expires_in: 100
+  mapType_google: GOOGLE
+xinya:
+  xsungroupurl: https://uat.xsungroup.cn
+scheduler:
+   close: true
+xinya-external: http://dev-external.xsungroup.cn
+xinya-message: http://dev-stomp.xsungroup.cn

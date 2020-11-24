@@ -1,0 +1,42 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongodb.test.svc.cluster.local:27017/ail-location
+  datasource:
+    url: jdbc:mysql://mysql-svc.test.svc.cluster.local:3306/cargo_payment?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: xsun_group
+    password: 1iDnwwKq2QNRfD9N
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 10.10.10.222:26379,10.10.10.222:26380,10.10.10.222:26381
+    database: 10
+  rabbitmq:
+    addresses: rabbitmq-svc.test.svc.cluster.local
+    port: 61613
+    username: user
+    password: password
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.10.10.221:8848 #服务注册中心地址
+        ephemeral: true
+        namespace: 77c3fbf5-d280-494e-835d-285640fcc9d4
+xinya-external: http://external-svc.test.svc.cluster.local:8080
+xinya-message: http://message-svc.test.svc.cluster.local:8080
+aliyun:
+  oss:
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    accessKeyId: LTAI4ooYJrYiSuKj
+    accessKeySecret: 15PsOAAV9bRYavpG4qFs8r4pKhpskj
+    bucketName: test-xinya
+    accessDomainName: http://test-oss.xsungroup.cn/
+#alipay.appId: 2021002102648699
+alipay.appId: 2016103000780148
+alipay.gateWay: https://openapi.alipaydev.com/gateway.do
+#alipay.gateWay: https://openapi.alipay.com/gateway.do
+alipay.app_private_key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCfwjTCMfP4fr1PhbMmanCHKRyCDBrXKjFUX0NlxJ3sK2UKxmrpL5WO3E3F6WCqANU0CFuYuQ0xvuM9AhcaP5/EzlG+E3pm1jfwkLuiFPh/1WLGHDBoyiHu/h/EFLhJ3rtonTKDtCRoLGdXRckItd+KhFhZ8cpLSoBZ/zqIZrTuX8uniPuRFBrgVSZOjX9W3TNTQly6RIlbEfgVuOMZ8108jH4YK4o5KorHqnFijr4y+N4gvX1wRbpuQctGJ1+kOGWI8Koyta2lYR7bA83t8HNv6aWE7/B/9PIXB+Una33Ic0A3Dn3xyf3JW738/uM4SKWUT1vCSQQVYmWdP2F/xQ0tAgMBAAECggEAJcY9w00car1M9eifG44/XTYTT4ydLBMF5vU/cmizDoyUL6AK12gw7L6ahRlRieD4iH0Ra2MWA5UnFd3QqJwyos5F9bOVVYuBXphaRVDAETnbSQyRRbXFoETmLe7YRF8t4OaKcym9EgStyqztg+m9GXuBiILrWjIbdywqIuZmEZajenWgNLJI1Hk8BEAxHZZoBOYpnH928wT61UCbCarhg9+GyC43Trr1SSBmNkIduHWgoO9DC2G85c5NdTzem9WK+TpKfwl0pfL5IiivNj7NWjBNDnTE3KCacnDytBUu/mtyAfIVhT/V+bSmFZ8CFSD1VcQZZ/SpCW5fORJYt5xCAQKBgQD3BP8F652yrfXGe2UZHudbTxHiF00AOCVjrRnfvJiweOhD9jn/pt3AIMCIUDY8kvwJzOcISexF1WGZV8kRzGmDCebdeMjCJKtyHl9JL3o4ZOIXCa6sEAWrI+1dR7n/ycT4h91g4D1y2rhbc+wXMdLcjYR9GEMryRizhf4qMhnW8QKBgQClkRM7p4k3DXcF/tWTllUsSCa5POtR2ee5pE1U3yw7pzWQCyD/DsKdYn3P2cZEp7rcrXI2VCGLu7bGKODRVW08YzJxxq4U4THsWs/Ya8Kxk7mXwN/wwUHDIfcogEX+IjE/IwgFBp+FWxnOeaiK7sCuWcRoT6e6de3U2+M37o+x/QKBgQC2rRkz9aTvyLpjiEmhpDsQSY8+FmE5ckwkRJVH4p9AkomiCOunZm3DcfUwWbFiZojBbqjEdnamxkChOExYP0UgRShYTMSa3qdzg4aQBu5p2iFhTCXC1S57+9vEChFBWqOx8DgFNo/66klASKAmHxCDTpzWLiUusk70JHlsFxUI4QKBgGQ6kQQaBg0Xz6gHf0/bQDCQdTDKWkKwwYE2n8HzYJm0Pc63jgAZ9WLFjxhW45oIWCzjqzKMd8pZluobMQ5Iwto9yvnpptTpBwnoZ87CXZiWr1HY5zieJat1UmRoUvbnyBxKnr48JjHa1qKSL5/7rRVfLnFfV1Cft5yWiNUBTGgZAoGBAMvNACWcaXUDiZXlQ6/DyDyIsiRCZubnxWyWIEeUPFEGLipr5euc8M6d+pLyH8ueLDhTi2VyAiHRjxBiIAaxI7vJf7tJLC5hRfB2vqlLSw8YmMFdSLld8/G8/tuN77HGEEzmKfEIW9CGJctwRxpak4TmPRWhst2MsqispI9voJKz
+#alipay.alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtP1ZtJKUrbDTe5FGyCew5zOxdRiuEItmARxX4MoUlDQaWTai7ZA7vVQrAD/ZBEqN/KJ/gkYj+DcKN3gMStKExe0+OHcW/IqSmJJxFl/YY4d6ETb9LMW73Li3/HML+D/56XKNBXzC/zQrLpBVDjlDG8XXZk3vdGzMAlg3k3JwTk1sByghFgkmOVOZ8jOhxPhvhZgv6SlHEX+rTOXPXaGcCvHxkyQmnQCNm+yE9+WO/KpxyVRhuEPICBy6azpD1iyAYGHcO1U4U5162JBVfBcC90iyXjnBzqWUMZqdwvOazyXQ+j91UtQlvPrz1O7zpHuLZIdf8c8y3xUz0TlxwijOXwIDAQAB
+alipay.alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6abEGv1iPv14oPHrBMRTFc8AdGEMtqNMqVo13z6Njir4juGKaxF2cDX1FdzMzEKaN5O7YcYsx1FrFZrqA8Qtn0bmlVTVNocI4ys4Huen7zmETSWqy4qsHli0zXPXLgxwBBHNb4jwZmZVZm/lF0U70naGFoSN3wBY8k8TLiegJRUhiYQ4HlsjIQrDIcvKI9uJCkUa8hzaGYDQPyGhgQd7vddxQYjuXep/6DW7qze7sPzn6uHrCmQAsB97mQaI4ZpGhTg3DjgfwpPUdO31jLRaDQ5nVSlWENTPvsyNCgw6lv0LGzS4VkCuuGfjB/Pfck6pe4hkdLWg5bQri3sEV0gNFQIDAQAB
+
+alipay.callback.url: http://116.232.55.174:18089/payment/callback

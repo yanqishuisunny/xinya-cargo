@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.bill.mapper.BillOrderMapper">
+
+    <select id="billOrderWayList" resultType="com.cargo.bill.vo.BillOrderSummaryVo">
+        SELECT
+            count( 1 ) AS num,
+            SUM( o.amount_paid ) AS totalAmount,
+            MAX( o.to_area ) AS toArea,
+            MAX( o.from_area ) AS fromArea
+        FROM
+            bill_order o
+        WHERE
+            1 = 1
+        <if test="dto.startTime != null and dto.startTime !=''">
+            AND o.transport_finish_time &gt;= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null and dto.endTime !=''">
+            AND o.transport_finish_time &lt;= #{dto.endTime}
+        </if>
+        <if test="dto.ownerOrgId != null and dto.ownerOrgId !=''">
+            AND o.owner_org_id = #{dto.ownerOrgId}
+        </if>
+        <if test="dto.orgId != null and dto.orgId !=''">
+            AND o.org_id = #{dto.orgId}
+        </if>
+            AND o.org_id
+        GROUP BY
+            o.to_area,
+            o.from_area
+    </select>
+
+    <select id="billOrderOwnerList" resultType="com.cargo.bill.vo.BillOrderSummaryVo">
+        SELECT
+            count( 1 ) AS num,
+            SUM( o.amount_paid ) AS ownerTotalAmount,
+            MAX(o.owner_org_id) AS ownerOrgId,
+            MAX(o.owner_org_name) AS ownerOrgName
+        FROM
+            bill_order o
+        WHERE
+            1 = 1
+        <if test="dto.startTime != null and dto.startTime !=''">
+            AND o.transport_finish_time &gt;= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null and dto.endTime !=''">
+            AND o.transport_finish_time &lt;= #{dto.endTime}
+        </if>
+        <if test="dto.ownerOrgId != null and dto.ownerOrgId !=''">
+            AND o.owner_org_id = #{dto.ownerOrgId}
+        </if>
+        <if test="dto.orgId != null and dto.orgId !=''">
+            AND o.org_id = #{dto.orgId}
+        </if>
+
+        GROUP BY
+            o.owner_org_id
+
+    </select>
+
+</mapper>

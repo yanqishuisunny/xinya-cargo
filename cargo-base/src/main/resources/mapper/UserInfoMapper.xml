@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.user.mapper.UserInfoMapper">
+
+
+    <select id="findByPageUserInfo" resultType="com.cargo.user.entity.UserInfoEntity">
+        SELECT
+            u.* ,
+            t.org_id
+        FROM
+        t_org_user_association t
+        LEFT JOIN c_user_info u ON t.user_id = u.user_id
+        WHERE
+        u.is_able = 1
+        and t.is_able = 1
+        and t.org_role = #{versionType}
+        <if test="currentUser.orgId !=null and currentUser.orgId != ''">
+            and t.org_id = #{currentUser.orgId}
+        </if>
+        <if test="userInfoDto.userCode !=null and userInfoDto.userCode != ''">
+            and u.user_code = #{userInfoDto.userCode}
+        </if>
+        <if test="userInfoDto.userName !=null and userInfoDto.userName != ''">
+            and u.user_name = #{userInfoDto.userName}
+        </if>
+        <if test="userInfoDto.status !=null">
+            and u.status = #{userInfoDto.status}
+        </if>
+    </select>
+
+
+
+    <select id="findCurrentUser" resultType="com.commom.vo.CurrentUser">
+        SELECT
+            t2.org_name,
+            t2.org_id,
+            u.user_type,
+            u.user_id,
+            u.user_code,
+            u.user_name,
+            u.phone_no,
+            u.user_type,
+            u.status,
+            u.data_role,
+            u.menu_role,
+            t1.role_id,
+            t2.org_type AS org_type,
+            t2.user_id as admin_id,
+            t3.status as menu_status
+        FROM c_user_info u
+        LEFT JOIN t_org_user_association t1 on u.user_id = t1.user_id
+        LEFT JOIN t_org t2 on t1.org_id = t2.org_id
+        LEFT JOIN c_menu_role_main t3 on t1.role_id = t3.role_main_id
+        WHERE u.user_id = #{userId} and u.is_able = 1
+        and   t1.org_id = #{orgId} and t1.is_able = 1
+	</select>
+
+
+
+    <select id="selectUserPage" resultType="com.cargo.user.vo.UserInfoVo">
+        SELECT
+        t.user_id,
+        t.group_id,
+        t.org_id,
+        t.user_code,
+        t.user_name,
+        t.alias_name,
+        t.depart_id,
+        t.alias_name,
+        t.status
+        FROM
+        c_user_info t
+        where
+        t.is_able = 1
+        and t.org_id = #{orgId}
+    </select>
+
+
+
+</mapper>

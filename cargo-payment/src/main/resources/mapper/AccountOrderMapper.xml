@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.account.mapper.AccountOrderMapper">
+
+    <select id="accountOrderMapperList" resultType="com.cargo.account.vo.AccountOrderVo">
+
+        SELECT
+            ao.*
+        FROM
+            account_order ao
+        LEFT JOIN bill_order bo ON ao.account_order_id = bo.account_order_id
+
+        WHERE
+            ao.is_able = 1
+        <if test="dto.accountNo != null and dto.accountNo !=''">
+            AND ao.account_no = #{dto.accountNo}
+        </if>
+        <if test="dto.orderNo != null and dto.orderNo !=''">
+            AND bo.order_no = #{dto.orderNo}
+        </if>
+        <if test="dto.startTime != null and dto.startTime !=''">
+            AND ao.gmt_create >= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null and dto.endTime !=''">
+            AND ao.gmt_create >= #{dto.endTime}
+        </if>
+        <if test="dto.createUser != null and dto.createUser !=''">
+            AND ao.create_user = #{dto.createUser}
+        </if>
+        <if test="dto.accountStatus != null and dto.accountStatus !=''">
+            AND ao.account_status = #{dto.accountStatus}
+        </if>
+        <if test="dto.orgId != null and dto.orgId !=''">
+            AND ao.org_id = #{dto.orgId}
+        </if>
+        GROUP BY ao.account_order_id
+
+
+    </select>
+</mapper>

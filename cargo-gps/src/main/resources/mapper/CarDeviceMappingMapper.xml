@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.location.mapper.CarDeviceMappingDao">
+
+
+    <select id="queryDeviceInformation" resultType="com.cargo.location.vo.DeviceVo">
+        SELECT
+        t1.vehicle_no,
+        t2.imei,
+        t1.carrier,
+        t2.status
+        FROM
+        device_info t2
+        LEFT JOIN car_device_mapping t1 ON t1.imei = t2.imei and t1.enable=1
+        WHERE
+        t2.ENABLE = 1
+        <if test="p.vehicleNo != null and p.vehicleNo != ''">
+            and t1.vehicle_no = #{p.vehicleNo}
+        </if>
+        <if test="p.imei != null and p.imei != ''">
+            and t1.imei = #{p.imei}
+        </if>
+        <if test="p.status != null and p.status != ''">
+            and t2.status = #{p.status}
+        </if>
+        ORDER BY
+        CONVERT ( t1.vehicle_no USING gbk ) COLLATE gbk_chinese_ci ASC
+    </select>
+
+
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.user.mapper.OrgMapper">
+
+    <select id="queryForExamineList" resultType="com.cargo.user.vo.OrgVo">
+        select t.*,nullif(ca.license_org_code,own.license_org_code) as licenseOrgcode from t_org t
+        left join t_carrier ca on t.org_id = ca.org_id
+        left join t_owner own on t.org_id = own.org_id
+        where t.is_able = 1
+        and t.audit_status in
+        <foreach item="item" collection="dto.listAuditStatus" separator="," open="(" close=")" index="">
+            #{item, jdbcType=INTEGER}
+        </foreach>
+        <if test="dto.orgRole != null and dto.orgRole !=''">
+            dto.org_role = #{dto.orgRole}
+        </if>
+        order by t.gmt_create desc
+    </select>
+</mapper>

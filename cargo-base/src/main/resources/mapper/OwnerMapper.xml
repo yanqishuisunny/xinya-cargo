@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.owner.mapper.OwnerMapper">
+
+    <select id="queryForExamineList" resultType="com.cargo.owner.vo.OwnerVo">
+        select * from t_owner t
+        where is_able = 1
+        and t.audit_status in
+        <foreach item="item" collection="dto.listAuditStatus" separator="," open="(" close=")" index="">
+            #{item, jdbcType=INTEGER}
+        </foreach>
+
+    </select>
+</mapper>

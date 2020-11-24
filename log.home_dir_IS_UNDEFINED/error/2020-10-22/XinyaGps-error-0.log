@@ -1,0 +1,392 @@
+2020-10-22 10:31:47.059 [ERROR] org.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'rabbitMqConfig': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'abs.queue.default' in value "${abs.queue.default}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1422)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:879)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
+	at com.cargo.XinyaPushApplication.main(XinyaPushApplication.java:19)
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'abs.queue.default' in value "${abs.queue.default}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:178)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:124)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:236)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:175)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:908)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1228)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1207)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:116)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	... 17 common frames omitted
+2020-10-22 15:04:16.078 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'mybatis-plus.configuration' to com.baomidou.mybatisplus.core.MybatisConfiguration:
+
+    Property: mybatis-plus.configuration.log-impl
+    Value: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    Origin: class path resource [application.yml]:30:15
+    Reason: org.slf4j.event.LoggingEvent
+
+Action:
+
+Update your application's configuration
+
+2020-10-22 15:05:33.533 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'mybatis-plus.configuration' to com.baomidou.mybatisplus.core.MybatisConfiguration:
+
+    Property: mybatis-plus.configuration.log-impl
+    Value: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    Origin: class path resource [application.yml]:30:15
+    Reason: org.slf4j.event.LoggingEvent
+
+Action:
+
+Update your application's configuration
+
+2020-10-22 15:08:11.465 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'mybatis-plus.configuration' to com.baomidou.mybatisplus.core.MybatisConfiguration:
+
+    Property: mybatis-plus.configuration.log-impl
+    Value: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    Origin: class path resource [application.yml]:30:15
+    Reason: org.slf4j.event.LoggingEvent
+
+Action:
+
+Update your application's configuration
+
+2020-10-22 15:09:47.391 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'mybatis-plus.configuration' to com.baomidou.mybatisplus.core.MybatisConfiguration:
+
+    Property: mybatis-plus.configuration.log-impl
+    Value: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    Origin: class path resource [application.yml]:30:15
+    Reason: org.slf4j.event.LoggingEvent
+
+Action:
+
+Update your application's configuration
+
+2020-10-22 15:14:09.759 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'mybatis-plus.configuration' to com.baomidou.mybatisplus.core.MybatisConfiguration:
+
+    Property: mybatis-plus.configuration.log-impl
+    Value: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    Origin: class path resource [application.yml]:30:15
+    Reason: org.slf4j.event.LoggingEvent
+
+Action:
+
+Update your application's configuration
+
+2020-10-22 15:20:04.727 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'mybatis-plus.configuration' to com.baomidou.mybatisplus.core.MybatisConfiguration:
+
+    Property: mybatis-plus.configuration.log-impl
+    Value: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    Origin: class path resource [application.yml]:30:15
+    Reason: org.slf4j.event.LoggingEvent
+
+Action:
+
+Update your application's configuration
+
+2020-10-22 15:20:49.699 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'mybatis-plus.configuration' to com.baomidou.mybatisplus.core.MybatisConfiguration:
+
+    Property: mybatis-plus.configuration.log-impl
+    Value: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    Origin: class path resource [application.yml]:30:15
+    Reason: org.slf4j.event.LoggingEvent
+
+Action:
+
+Update your application's configuration
+
+2020-10-22 15:27:40.550 [ERROR] org.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'rabbitMqConfig': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'abs.queue.default' in value "${abs.queue.default}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1422)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:879)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
+	at com.cargo.XinyaMessageApplication.main(XinyaMessageApplication.java:19)
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'abs.queue.default' in value "${abs.queue.default}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:178)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:124)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:236)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:175)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:908)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1228)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1207)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:116)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	... 17 common frames omitted
+2020-10-22 15:30:32.591 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'mybatis-plus.configuration' to com.baomidou.mybatisplus.core.MybatisConfiguration:
+
+    Property: mybatis-plus.configuration.log-impl
+    Value: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    Origin: class path resource [application.yml]:30:15
+    Reason: org.slf4j.event.LoggingEvent
+
+Action:
+
+Update your application's configuration
+
+2020-10-22 15:39:28.013 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
+
+The following method did not exist:
+
+    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
+
+The method's class, com.google.gson.GsonBuilder, is available from the following locations:
+
+    jar:file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar!/com/google/gson/GsonBuilder.class
+
+It was loaded from the following location:
+
+    file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
+
+2020-10-22 15:40:52.409 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
+
+The following method did not exist:
+
+    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
+
+The method's class, com.google.gson.GsonBuilder, is available from the following locations:
+
+    jar:file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar!/com/google/gson/GsonBuilder.class
+
+It was loaded from the following location:
+
+    file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
+
+2020-10-22 15:43:19.552 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
+
+The following method did not exist:
+
+    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
+
+The method's class, com.google.gson.GsonBuilder, is available from the following locations:
+
+    jar:file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar!/com/google/gson/GsonBuilder.class
+
+It was loaded from the following location:
+
+    file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
+
+2020-10-22 15:45:33.380 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
+
+The following method did not exist:
+
+    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
+
+The method's class, com.google.gson.GsonBuilder, is available from the following locations:
+
+    jar:file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar!/com/google/gson/GsonBuilder.class
+
+It was loaded from the following location:
+
+    file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
+
+2020-10-22 15:51:05.470 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
+
+The following method did not exist:
+
+    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
+
+The method's class, com.google.gson.GsonBuilder, is available from the following locations:
+
+    jar:file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar!/com/google/gson/GsonBuilder.class
+
+It was loaded from the following location:
+
+    file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
+
+2020-10-22 15:59:32.476 [ERROR] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
+
+The following method did not exist:
+
+    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
+
+The method's class, com.google.gson.GsonBuilder, is available from the following locations:
+
+    jar:file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar!/com/google/gson/GsonBuilder.class
+
+It was loaded from the following location:
+
+    file:/C:/Users/Aril/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
+

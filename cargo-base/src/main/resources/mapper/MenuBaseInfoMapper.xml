@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.user.mapper.MenuBaseInfoMapper">
+
+    <select id="findMenuBaseInfoList" resultType="com.cargo.user.vo.MenuBaseInfoVo">
+    SELECT distinct
+            cp.base_info_id as 'id',
+            cp.menu_name,
+            cp.menu_code,
+            cp.parent_id,
+            cp.url,
+            cp.icon_class ,
+            cp.sort ,
+            IFNULL(t.checked,'0') as 'checked'
+            FROM
+            c_menu_base_info cp
+            LEFT JOIN (
+            SELECT
+            p.*,  "1"  as 'checked'
+            FROM
+            c_menu_base_info p
+            LEFT JOIN c_menu_role_detail r ON p.base_info_id = r.base_info_id
+            WHERE
+            r.role_main_id = #{roleId}
+            and p.version_type = #{versionType}
+            and r.is_able = 1
+            ) as t on t.base_info_id = cp.base_info_id
+        where cp.is_able = 1
+        and cp.version_type = #{versionType}
+    </select>
+
+
+    <select id="findByMenuBaseInfoListByLogin" resultType="com.cargo.user.vo.MenuBaseInfoVo">
+        SELECT
+            p.base_info_id as 'id',
+            p.menu_name,
+            p.parent_id,
+            p.url,
+            p.icon_class,
+            p.sort
+            FROM
+            c_menu_base_info p
+            LEFT JOIN c_menu_role_detail r ON p.base_info_id = r.base_info_id and r.is_able = 1
+            WHERE
+            p.version_type = #{versionType}
+            and p.is_able = 1
+            and p.status = 1
+            and r.role_detail_id is not null
+            <if test="user.roleId != null and user.roleId != ''">
+                and r.role_main_id = #{user.roleId}
+            </if>
+    </select>
+
+
+</mapper>

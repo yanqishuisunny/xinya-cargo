@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" scan="true">
+
+
+	<logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
+	<logger name="org.apache.catalina.util.LifecycleBase" level="ERROR"/>
+	<logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
+	<logger name="org.apache.sshd.common.util.SecurityUtils" level="WARN"/>
+	<logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"/>
+	<logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="ERROR"/>
+	<logger name="org.hibernate.validator.internal.util.Version" level="WARN"/>
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+	<conversionRule conversionWord="wex"
+	                converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+	<conversionRule conversionWord="wEx"
+	                converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+	<property name="CONSOLE_LOG_PATTERN"
+	          value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+	<property name="FILE_LOG_PATTERN"
+	          value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+	<springProperty scope="context" name="app_active" source="spring.profiles.active"/>
+	<springProperty scope="context" name="app_name" source="spring.application.name"/>
+
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="Socket"
+	          class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<connectionStrategy class="net.logstash.logback.appender.destination.RandomDestinationConnectionStrategy"/>
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+			<provider class="com.cargo.VersionJsonProvider"/>
+		</encoder>
+		<destination>1.logstash.cargo.cn:4560</destination>
+		<destination>2.logstash.cargo.cn:4560</destination>
+		<destination>3.logstash.cargo.cn:4560</destination>
+		<destination>4.logstash.cargo.cn:4560</destination>
+		<destination>5.logstash.cargo.cn:4560</destination>
+		<destination>6.logstash.cargo.cn:4560</destination>
+		<destination>7.logstash.cargo.cn:4560</destination>
+		<destination>8.logstash.cargo.cn:4560</destination>
+		<reconnectionDelay>30 seconds</reconnectionDelay>
+		<includeCallerData>true</includeCallerData>
+		<queueSize>8192</queueSize>
+	</appender>
+
+	<springProfile name="dev">
+		<Logger name="org.apache.catalina.startup.DigesterFactory" level="error"/>
+		<Logger name="org.apache.catalina.util.LifecycleBase" level="error"/>
+		<Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn"/>
+		<logger name="org.apache.sshd.common.util.SecurityUtils" level="warn"/>
+		<Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn"/>
+		<Logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="error"/>
+		<Logger name="org.hibernate.validator.internal.util.Version" level="warn"/>
+		<logger name="org.springframework.boot.actuate.endpoint.jmx" level="warn"/>
+		<logger name="com.cargo" level="debug"/>
+
+		<root level="INFO">
+			<appender-ref ref="Console"/>
+		</root>
+	</springProfile>
+	<springProfile name="!dev">
+		<Logger name="org.apache.catalina.startup.DigesterFactory" level="error"/>
+		<Logger name="org.apache.catalina.util.LifecycleBase" level="error"/>
+		<Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn"/>
+		<logger name="org.apache.sshd.common.util.SecurityUtils" level="warn"/>
+		<Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn"/>
+		<Logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="error"/>
+		<Logger name="org.hibernate.validator.internal.util.Version" level="warn"/>
+		<logger name="org.springframework.boot.actuate.endpoint.jmx" level="warn"/>
+		<logger name="com.cargo" level="debug"/>
+		<root level="INFO">
+			<appender-ref ref="Console"/>
+			<appender-ref ref="Socket"/>
+		</root>
+	</springProfile>
+</Configuration>

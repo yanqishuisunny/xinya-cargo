@@ -1,0 +1,62 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://10.10.10.227:27019/ail-location
+  datasource:
+    url: jdbc:mysql://10.10.10.227:3306/cargo_base?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: xsun_group
+    password: kqh9845lddGFdb5E
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 10.10.10.222:26379,10.10.10.222:26380,10.10.10.222:26381
+    database: 1
+  rabbitmq:
+    addresses: 10.10.10.227
+    port: 61613
+    username: user
+    password: password
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.10.10.221:8848 #服务注册中心地址
+        ephemeral: true
+        namespace: 9e2f19f2-4334-4ffd-a4ca-875f2076e5b7
+  ###producer
+  #该应用是否启用生产者
+rocketmq:
+  producer:
+    isOnOff: on
+    groupName: ${spring.application.name}
+    #mq的nameserver地址
+    namesrvAddr: 10.10.10.111:9876,10.10.10.212:9876
+    #消息最大长度 默认1024*4(4M)
+    maxMessageSize: 4096
+    #发送消息超时时间,默认3000
+    sendMsgTimeout: 3000
+    #发送消息失败重试次数，默认2
+    retryTimesWhenSendFailed: 2
+  ###consumer
+  ##该应用是否启用消费者
+  consumer:
+    isOnOff: on
+    groupName: ${spring.application.name}
+    #mq的nameserver地址
+    namesrvAddr: 10.10.10.111:9876,10.10.10.212:9876
+    #该消费者订阅的主题和tags("*"号表示订阅该主题下所有的tags),格式：topic~tag1||tag2||tag3;topic2~*;
+    topics: futaotopic~*;
+    consumeThreadMin: 20
+    consumeThreadMax: 64
+    #设置一次消费消息的条数，默认为1条
+    consumeMessageBatchMaxSize: 1
+swagger:
+  enable: true
+xinya-external: http://dev-external.xsungroup.cn
+xinya-message: http://dev-stomp.xsungroup.cn
+aliyun:
+  oss:
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    accessKeyId: LTAI4ooYJrYiSuKj
+    accessKeySecret: 15PsOAAV9bRYavpG4qFs8r4pKhpskj
+    bucketName: test-xinya
+    accessDomainName: http://test-oss.xsungroup.cn/

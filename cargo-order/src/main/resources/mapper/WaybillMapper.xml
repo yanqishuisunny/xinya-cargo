@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.waybill.mapper.WaybillMapper">
+
+    <select id="queryForlist" resultType="com.cargo.waybill.vo.WaybillVo">
+        select * from t_waybill way
+        where way.is_able = 1
+        <choose >
+            <!-- queryType  1:所有    2：我创建的   3：司机 -->
+
+            <when test="dto.queryType != null and dto.queryType == 2">
+                AND way.create_user = #{dto.currentUserId}
+            </when>
+            <when test="dto.queryType != null and dto.queryType == 3">
+                AND way.driver_id = #{dto.currentUserId}
+            </when>
+        </choose>
+        <if test="dto.generalOrderNo != null and dto.generalOrderNo != ''">
+            AND way.general_order_no = #{dto.generalOrderNo}
+        </if>
+        <if test="dto.generalOrderId != null and dto.generalOrderId != ''">
+            AND way.general_order_id = #{dto.generalOrderId}
+        </if>
+        <if test="dto.listStatus != null">
+            AND  way.waybill_status IN
+            <foreach collection="dto.listStatus" item="t" index="index" open="(" separator="," close=")">
+                #{t}
+            </foreach>
+        </if>
+        order by way.gmt_create desc
+    </select>
+</mapper>

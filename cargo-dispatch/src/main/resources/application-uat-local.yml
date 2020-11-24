@@ -1,0 +1,22 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://10.10.10.221:27018/ail-location
+  datasource:
+    url: jdbc:mysql://10.10.10.212:4306/xsun_gps?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: xsun_group
+    password: 1iDnwwKq2QNRfD9N
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 10.10.10.222:26379,10.10.10.222:26380,10.10.10.222:26381
+    database: 1
+  rabbitmq:
+    addresses: 10.10.10.227
+    port: 61615
+    username: user
+    password: password
+swagger:
+  enable: true
+
+

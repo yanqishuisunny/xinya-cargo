@@ -1,0 +1,33 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://10.10.10.227:27019/ail-location
+  datasource:
+    url: jdbc:mysql://10.10.10.227:3306/xsun_gps?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: mysql_password
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 10.10.10.222:26379,10.10.10.222:26380,10.10.10.222:26381
+    database: 1
+  rabbitmq:
+    addresses: 10.10.10.227
+    port: 61613
+    username: user
+    password: password
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.10.10.221:8848 #服务注册中心地址
+        ephemeral: true
+        namespace: 9e2f19f2-4334-4ffd-a4ca-875f2076e5b7
+swagger:
+  enable: true
+abs:
+  queue:
+    default: abs.default.dev-local
+scheduler:
+  close: true
+xinya-external: http://dev-external.xsungroup.cn
+xinya-message: http://dev-stomp.xsungroup.cn

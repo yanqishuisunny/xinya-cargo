@@ -1,0 +1,8 @@
+2020-10-21 09:44:34.718 [DEBUG] org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator - Analyzing class class com.cargo.location.model.mongo.Location for index information.
+2020-10-21 18:53:15.162 [DEBUG] org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator - Analyzing class class com.cargo.location.model.mongo.Location for index information.
+2020-10-21 18:55:26.780 [DEBUG] org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator - Analyzing class class com.cargo.location.model.mongo.Location for index information.
+2020-10-21 18:57:07.987 [DEBUG] org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator - Analyzing class class com.cargo.location.model.mongo.Location for index information.
+2020-10-21 19:03:57.022 [DEBUG] org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator - Analyzing class class com.cargo.location.model.mongo.Location for index information.
+2020-10-21 19:06:58.735 [DEBUG] org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator - Analyzing class class com.cargo.location.model.mongo.Location for index information.
+2020-10-21 19:07:20.602 [DEBUG] org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator - Analyzing class class com.cargo.location.model.mongo.Location for index information.
+2020-10-21 19:17:12.570 [DEBUG] org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator - Analyzing class class com.cargo.location.model.mongo.Location for index information.

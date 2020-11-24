@@ -1,0 +1,33 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://10.10.10.227:27019/ail-location
+  datasource:
+    url: jdbc:mysql://10.10.10.227:3308/cargo_order?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: xsun_group
+    password: 1iDnwwKq2QNRfD9N
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 10.10.10.222:26379,10.10.10.222:26380,10.10.10.222:26381
+    database: 10
+  rabbitmq:
+    addresses: 10.10.10.227
+    port: 61615
+    username: user
+    password: password
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.10.10.221:8848 #服务注册中心地址
+        ephemeral: true
+        namespace: 77c3fbf5-d280-494e-835d-285640fcc9d4
+xinya-external: http://test-external.xsungroup.cn
+xinya-message: http://test-stomp.xsungroup.cn
+aliyun:
+  oss:
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    accessKeyId: LTAI4ooYJrYiSuKj
+    accessKeySecret: 15PsOAAV9bRYavpG4qFs8r4pKhpskj
+    bucketName: test-xinya
+    accessDomainName: http://test-oss.xsungroup.cn/

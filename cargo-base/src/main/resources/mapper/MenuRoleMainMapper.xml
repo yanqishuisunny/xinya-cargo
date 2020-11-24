@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.user.mapper.MenuRoleMainMapper">
+
+    <select id="findByPageMenuRoleMain" resultType="com.cargo.user.vo.MenuRoleMainVo">
+        select t.* from c_menu_role_main t
+        where t.is_able=1 and t.org_id = #{currentUser.orgId}
+        <if test="menuRoleMainDto.status != null ">
+            and t.status = #{menuRoleMainDto.status}
+        </if>
+        <if test="menuRoleMainDto.roleName != null and menuRoleMainDto.roleName != ''">
+            and t.role_name like CONCAT('%',#{menuRoleMainDto.roleName},'%')
+        </if>
+        <if test="menuRoleMainDto.roleCode != null and menuRoleMainDto.roleCode != ''">
+            and t.role_code = #{menuRoleMainDto.roleCode}
+        </if>
+    </select>
+</mapper>

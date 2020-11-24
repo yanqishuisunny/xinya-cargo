@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.order.mapper.IntentionOrderMapper">
+
+    <select id="queryForList" resultType="com.cargo.order.vo.IntentionOrderVo">
+        select * from intention_order ord
+        where ord.is_able = 1
+        <if test="dto.intentionOrderNo != null and dto.intentionOrderNo != ''">
+            AND ord.intention_order_no = #{dto.intentionOrderNo}
+        </if>
+        <if test="dto.intentionStatus != null and dto.intentionStatus != ''">
+            AND ord.intention_status = #{dto.intentionStatus}
+        </if>
+        <choose >
+            <!-- queryType  1:我发出的    2：我收到的 -->
+            <when test="dto.queryWay != null and dto.queryWay == 1">
+                AND ord.from_user_id = #{dto.currentUserId}
+            </when>
+            <when test="dto.queryWay != null and dto.queryWay == 2">
+                AND ord.to_user_id = #{dto.currentUserId}
+            </when>
+        </choose>
+        order by ord.gmt_create desc
+    </select>
+</mapper>

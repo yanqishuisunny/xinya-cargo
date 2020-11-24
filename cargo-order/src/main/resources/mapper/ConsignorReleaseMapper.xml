@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.order.mapper.ConsignorReleaseMapper">
+    <resultMap id="ConsignorReleaseVoResultMap" type="com.cargo.order.vo.ConsignorReleaseVo">
+        <id column="consignor_release_id" property="consignorReleaseId" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="check_remark" property="checkRemark" jdbcType="VARCHAR" />
+        <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+        <result column="cargo_user_id" property="cargoUserId" jdbcType="VARCHAR" />
+        <result column="sender_org_name" property="senderOrgName" jdbcType="VARCHAR" />
+        <result column="sender_user_name" property="senderUserName" jdbcType="VARCHAR" />
+        <result column="sender_user_phone" property="senderUserPhone" jdbcType="VARCHAR" />
+        <result column="expiry_days" property="expiryDays" jdbcType="INTEGER" />
+        <result column="expiry_days_date" property="expiryDaysDate" jdbcType="INTEGER" />
+        <result column="validity_date" property="validityDate" jdbcType="INTEGER" />
+        <result column="sender_area_province_id" property="senderAreaProvinceId" jdbcType="VARCHAR" />
+        <result column="sender_area_province_name" property="senderAreaProvinceName" jdbcType="VARCHAR" />
+        <result column="sender_area_city_id" property="senderAreaCityId" jdbcType="VARCHAR" />
+        <result column="sender_area_city_name" property="senderAreaCityName" jdbcType="VARCHAR" />
+        <result column="sender_area_town_id" property="senderAreaTownId" jdbcType="VARCHAR" />
+        <result column="sender_area_town_name" property="senderAreaTownName" jdbcType="VARCHAR" />
+        <result column="sender_procity_name" property="senderProcityName" jdbcType="VARCHAR" />
+        <result column="sender_area_detail" property="senderAreaDetail" jdbcType="VARCHAR" />
+        <result column="sender_start_time" property="senderStartTime" jdbcType="INTEGER" />
+        <result column="sender_end_time" property="senderEndTime" jdbcType="INTEGER" />
+        <result column="delivery_area_province_id" property="deliveryAreaProvinceId" jdbcType="VARCHAR" />
+        <result column="delivery_area_province_name" property="deliveryAreaProvinceName" jdbcType="VARCHAR" />
+        <result column="delivery_area_city_id" property="deliveryAreaCityId" jdbcType="VARCHAR" />
+        <result column="delivery_area_city_name" property="deliveryAreaCityName" jdbcType="VARCHAR" />
+        <result column="delivery_area_town_id" property="deliveryAreaTownId" jdbcType="VARCHAR" />
+        <result column="delivery_area_town_name" property="deliveryAreaTownName" jdbcType="VARCHAR" />
+        <result column="delivery_procity_name" property="deliveryProcityName" jdbcType="VARCHAR" />
+        <result column="delivery_area_detail" property="deliveryAreaDetail" jdbcType="VARCHAR" />
+        <result column="prescription" property="prescription" jdbcType="INTEGER" />
+        <result column="price" property="price" jdbcType="INTEGER" />
+        <result column="price_type_id" property="priceTypeId" jdbcType="VARCHAR" />
+        <result column="gps_mileage" property="gpsMileage" jdbcType="INTEGER" />
+        <result column="trspot_type_id" property="trspotTypeId" jdbcType="VARCHAR" />
+        <result column="car_type_id" property="carTypeId" jdbcType="VARCHAR" />
+        <result column="car_size_id" property="carSizeId" jdbcType="VARCHAR" />
+        <result column="consignor_remark" property="consignorRemark" jdbcType="VARCHAR" />
+        <result column="delivery_org_name" property="deliveryOrgName" jdbcType="VARCHAR" />
+        <result column="delivery_user_name" property="deliveryUserName" jdbcType="VARCHAR" />
+        <result column="delivery_user_phone" property="deliveryUserPhone" jdbcType="VARCHAR" />
+        <collection property="listGoods" ofType="com.cargo.order.entity.GoodsEntity" column="consignor_release_id" select="getGoodsId"/>
+    </resultMap>
+    <resultMap id="goodsMap" type="com.cargo.order.entity.GoodsEntity">
+        <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+        <result column="consignor_release_id" property="consignorReleaseId" jdbcType="VARCHAR" />
+        <result column="goods_type_id" property="goodsTypeId" jdbcType="VARCHAR" />
+        <result column="goods_category_id" property="goodsCategoryId" jdbcType="VARCHAR" />
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+        <result column="goods_volume_val" property="goodsVolumeVal" jdbcType="DECIMAL" />
+        <result column="goods_volume_unit_id" property="goodsVolumeUnitId" jdbcType="VARCHAR" />
+        <result column="goods_weight_val" property="goodsWeightVal" jdbcType="DECIMAL" />
+        <result column="goods_weight_unit_id" property="goodsWeightUnitId" jdbcType="VARCHAR" />
+        <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    </resultMap>
+    <update id="updateByListIds">
+        update consignor_release con
+        set con.is_able = 0 where con.consignor_release_id in
+        <foreach item="item" collection="ids" separator="," open="(" close=")" index="">
+          #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+
+    <select id="queryForList" resultMap="ConsignorReleaseVoResultMap">
+            select * from consignor_release con
+            where con.is_able = 1
+            <if test="conRel.status != null and conRel.status !=''">
+                and con.status = #{conRel.status}
+            </if>
+            <if test="conRel.createUser != null and conRel.createUser !=''">
+                and con.create_user = #{conRel.createUser}
+            </if>
+    </select>
+    <select id="queryForOne" resultMap="ConsignorReleaseVoResultMap">
+        select * from consignor_release con
+        left join goods g on con.consignor_release_id = g.consignor_release_id and g.is_able = 1
+        where con.is_able = 1
+        <if test="id != null and id !=''">
+            and con.consignor_release_id = #{id}
+        </if>
+    </select>
+
+    <select id="getGoodsId" resultMap="goodsMap" parameterType="java.lang.String" >
+        select * from goods g
+        where g.is_able = 1
+       and g.consignor_release_id = #{id}
+
+    </select>
+
+
+</mapper>

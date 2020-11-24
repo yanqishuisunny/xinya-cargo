@@ -1,0 +1,48 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: xinya-gps
+  profiles:
+    active: dev-local
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      web-stat-filter:
+        enabled: true
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: 123456
+        allow: 127.0.0.1
+        filters: stat,wall,slf4j
+  data:
+    mongodb:
+      field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
+      repositories:
+        type: auto
+  main:
+    allow-bean-definition-overriding: true
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+#sql控制台输出
+logging:
+  level:
+    com.cargo.**.mapper: DEBUG
+jwt:
+  header: token   #http请求头所需要的字段
+  secret: hantek       #jwt秘钥
+  expiration: 86400      #token有效期 5分钟 单位:秒
+  refresh-expiration: 86400      #刷新token有效期 24小时 单位:秒
+  filter-uris:

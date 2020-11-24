@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.location.mapper.DeviceInfoDao">
+
+
+    <select id="queryProDistribution" resultType="com.cargo.location.vo.ProDistributionVo">
+        SELECT
+            t1.province,
+            t1.proNumber
+        FROM
+            (SELECT
+            t.province,
+            COUNT(*) AS proNumber
+        FROM
+            device_info t
+        WHERE
+            t.ENABLE = 1
+            and t.province is not null
+        GROUP BY
+            t.province)t1
+        ORDER BY
+            t1.proNumber desc,t1.province ASC
+    </select>
+
+
+
+    <select id="queryCyDistribution" resultType="com.cargo.location.vo.CyDistributionVo">
+        SELECT
+            t1.city,
+            t1.cyNumber
+        FROM
+            (SELECT
+            t.city,
+            COUNT(*) AS cyNumber
+        FROM
+            device_info t
+        WHERE
+            t.ENABLE = 1
+            and t.province = #{province}
+        GROUP BY
+            t.city)t1
+        ORDER BY
+            t1.cyNumber desc,t1.city ASC
+    </select>
+
+
+
+    <select id="queryStatusDib" resultType="com.cargo.location.vo.StatusVo">
+        SELECT
+            t.status,
+            COUNT(*) AS statusNumber
+        FROM
+            device_info t
+        WHERE
+            t.ENABLE = 1
+        GROUP BY
+            t.status
+    </select>
+
+
+    <select id="queryStatusDibByPro" resultType="com.cargo.location.vo.StatusVo">
+        SELECT
+            t.status,
+            COUNT(*) AS statusNumber
+        FROM
+            device_info t
+        WHERE
+            t.ENABLE = 1
+            and t.city is not null
+            and t.province = #{province}
+        GROUP BY
+            t.status
+    </select>
+
+
+    <select id="queryDeviceList" resultType="com.cargo.location.vo.DeviceVo">
+        SELECT
+        t1.imei,
+        t1.device_id,
+        t1.status,
+        t1.type,
+        t1.province,
+        t1.city,
+        DATE_FORMAT(t1.sim_expiration_time,'%Y-%m-%d %H:%i:%S') as sim_expiration_time,
+        t2.vehicle_no,
+        t2.carrier,
+        t3.supplier_name
+        FROM
+        device_info t1
+        LEFT JOIN car_device_mapping t2 ON t1.imei = t2.imei
+        and t2.enable=1
+        LEFT JOIN supplier_info t3 ON t1.supplier_id = t3.supplier_id
+        and t3.enable=1
+        WHERE
+        t1.ENABLE = 1
+        <if test="p.vehicleNo != null and p.vehicleNo != ''">
+            and t2.vehicle_no = #{p.vehicleNo}
+        </if>
+        <if test="p.carrier != null and p.carrier != ''">
+            and t2.carrier = #{p.carrier}
+        </if>
+        <if test="p.imei != null and p.imei != ''">
+            and t1.imei = #{p.imei}
+        </if>
+        <if test="p.status != null and p.status != ''">
+            and t1.status = #{p.status}
+        </if>
+        <if test="p.supplierName != null and p.supplierName != ''">
+            and t3.supplier_name = #{p.supplierName}
+        </if>
+        <if test="p.simExpirationTime != null">
+            and t1.sim_expiration_time >= #{p.simExpirationTime}
+        </if>
+        <if test="p.endSimExpirationTime != null">
+            and t1.sim_expiration_time  <![CDATA[  < ]]> #{p.endSimExpirationTime}
+        </if>
+        <if test="p.province != null and p.province != ''">
+            and t1.province = #{p.province}
+        </if>
+        <if test="p.city != null and p.city != ''">
+            and t1.city = #{p.city}
+        </if>
+        ORDER BY t1.status desc,CONVERT ( t2.vehicle_no USING gbk ) COLLATE gbk_chinese_ci ASC
+        LIMIT #{p.startOffset} ,#{p.pageSize}
+    </select>
+
+
+    <select id="queryDeviceAllList" resultType="com.cargo.location.vo.DeviceVo">
+        SELECT
+        t1.imei,
+        t1.device_id,
+        t1.status,
+        t1.type,
+        t1.province,
+        t1.city,
+        DATE_FORMAT(t1.sim_expiration_time,'%Y-%m-%d %H:%i:%S') as sim_expiration_time,
+        t2.vehicle_no,
+        t2.carrier,
+        t3.supplier_name
+        FROM
+        device_info t1
+        LEFT JOIN car_device_mapping t2 ON t1.imei = t2.imei
+        and t2.enable=1
+        LEFT JOIN supplier_info t3 ON t1.supplier_id = t3.supplier_id
+        and t3.enable=1
+        WHERE
+        t1.ENABLE = 1
+        <if test="p.vehicleNo != null and p.vehicleNo != ''">
+            and t2.vehicle_no = #{p.vehicleNo}
+        </if>
+        <if test="p.carrier != null and p.carrier != ''">
+            and t2.carrier = #{p.carrier}
+        </if>
+        <if test="p.imei != null and p.imei != ''">
+            and t1.imei = #{p.imei}
+        </if>
+        <if test="p.status != null and p.status != ''">
+            and t1.status = #{p.status}
+        </if>
+        <if test="p.supplierName != null and p.supplierName != ''">
+            and t3.supplier_name = #{p.supplierName}
+        </if>
+        <if test="p.simExpirationTime != null">
+            and t1.sim_expiration_time >= #{p.simExpirationTime}
+        </if>
+        <if test="p.endSimExpirationTime != null">
+            and t1.sim_expiration_time  <![CDATA[  < ]]> #{p.endSimExpirationTime}
+        </if>
+        <if test="p.province != null and p.province != ''">
+            and t1.province = #{p.province}
+        </if>
+        <if test="p.city != null and p.city != ''">
+            and t1.city = #{p.city}
+        </if>
+    </select>
+
+
+</mapper>

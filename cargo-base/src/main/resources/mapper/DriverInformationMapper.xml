@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cargo.user.mapper.DriverInformationMapper">
+
+    <select id="driverToRedis" resultType="com.cargo.user.vo.DriverMessageVo">
+      SELECT
+			ta.org_id as cooperationOrgId,
+			td.*
+		FROM
+			t_org_user_association ta
+			LEFT JOIN t_driver_information td ON td.user_id = ta.user_id
+		WHERE
+			ta.org_id = #{orgId}
+    </select>
+    <select id="queryForExamineList" resultType="com.cargo.user.vo.DriverInformationVo">
+		select * from t_driver_information t
+		where is_able = 1
+		and t.audit_status in
+		<foreach item="item" collection="dto.listAuditStatus" separator="," open="(" close=")" index="">
+			#{item, jdbcType=INTEGER}
+		</foreach>
+		<if test="dto.phoneNo !=null and dto.phoneNo !=''">
+			and t.phone_no = #{dto.phoneNo}
+		</if>
+		<if test="dto.driverLicenseName !=null and dto.driverLicenseName !=''">
+			and t.driver_license_name = #{dto.driverLicenseName}
+		</if>
+
+	</select>
+
+	<select id="hours" resultType="com.cargo.user.vo.DriverInCountVo">
+
+        SELECT
+            count( 1 ) AS count,
+        date_format( gmt_create, "%Y%m%d%H" ) AS hour
+        FROM
+            t_driver_information
+        <where>
+            <if test="start != null and end != null">
+                gmt_create between #{start} and  #{end}
+            </if>
+        </where>
+        GROUP BY
+            hour
+        ORDER BY
+            hour DESC
+    </select>
+	<select id="days" resultType="com.cargo.user.vo.DriverInCountVo">
+
+        SELECT
+            count( 1 ) AS count,
+        date_format( gmt_create, "%Y%m%d" ) AS hour
+        FROM
+            t_driver_information
+        <where>
+            <if test="start != null and end != null">
+                gmt_create between #{start} and  #{end}
+            </if>
+        </where>
+        GROUP BY
+            day
+        ORDER BY
+            day DESC
+    </select>
+
+	<select id="months" resultType="com.cargo.user.vo.DriverInCountVo">
+
+        SELECT
+            count( 1 ) AS count,
+        date_format( gmt_create, "%Y%m" ) AS hour
+        FROM
+            t_driver_information
+        <where>
+            <if test="start != null and end != null">
+                gmt_create between #{start} and  #{end}
+            </if>
+        </where>
+        GROUP BY
+            month
+        ORDER BY
+            month DESC
+    </select>
+</mapper>
