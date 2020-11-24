@@ -140,7 +140,7 @@ post application/json
 ```
 响应结果由 `ResponseGlobalAdvice` 统一封装，开发在Controller中返回数据原始类型即可，无需手动包装 
 
-对于异常处理，这里对于所有不符合业务正常逻辑的全部抛出业务异常，响应给客户端对应的异常状态码，异常的统一处理在`com.ysx.common.response.GlobalExceptionHandler`  统一处理，开发在编写代码过程中，只管抛就行  
+对于异常处理，这里对于所有不符合业务正常逻辑的全部抛出业务异常，响应给客户端对应的异常状态码，异常的统一处理在`GlobalExceptionHandler`  统一处理，开发在编写代码过程中，只管抛就行  
 ## jwt认证使用
 jwt技术这里就不做介绍了，项目已经将jwt相关封装完毕，jwt相关认证代码在
 `com.ysx.common.auth` 包下,需要配置的属性也在配置文件中列出
