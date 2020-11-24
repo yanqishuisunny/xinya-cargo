@@ -10,7 +10,15 @@ spring:
     sentinel:
       master: mymaster
       nodes: 10.10.10.222:26379,10.10.10.222:26380,10.10.10.222:26381
-    database: 10
+    database: 1
+#    连接超时时间（毫秒）
+#    timeout: 3000ms
+      ##    lettuce:
+      ##      pool:
+      ##        max-active: 8
+      ##        max-idle: 8
+    ##        min-idle: 1
+    ##        max-wait: -1
   rabbitmq:
     addresses: 10.10.10.227
     port: 61615
