@@ -258,6 +258,13 @@
             <version>5.3.9</version>
         </dependency>
 
+        <!-- redisson -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>LATEST</version>
+        </dependency>
+
     </dependencies>
 
         <distributionManagement>
