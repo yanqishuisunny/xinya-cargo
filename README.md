@@ -37,12 +37,11 @@
 
 依赖包 | 版本 | 作用
 ---|---|---
-springboot | 2.2.5.RELEASE | springboot基础
-mybatis-plus | 3.3.1 | 简化基础crud编写
-pagehelper | 5.1.11 | 简化连接查询分页代码编写
+springboot | 2.1.6.RELEASE | springboot基础
+mybatis-plus | 3.1.0 | 简化基础crud编写
 redisson | 3.13.3 | 简化分布式锁编写
 lombok | 1.18.12 | 简化实体模板代码
-knife4j | 2.0.3 | 基于swagger2的在线接口文档
+swagger2 | 2.0.3 | 基于swagger2的在线接口文档
 
 由上面须知jar包可以看出项目的主体主架所使用的技术，因此我不会多赘述上面那些jar包如何使用，这里假设你已经知道像 mybatis-plus，pagehelper，knife4j等的使用，如从未接触过，建议学习相关组件后在使用本项目，本项目在分包上很符合大众规范，因此项目基础功能基本看看就会(基础功能还需要额外学习成本肯定是不合适的，简单使用，看下下面[需要介绍的基础功能](#需要介绍的基础功能)即可，要是老司机不看也可无师自通，但是建议看下)，一些我自己封装的可选功能需要看下我下面写的[框架功能扩展](#框架功能扩展)   
 
@@ -271,9 +270,6 @@ public class UserBaseActionController {
     }
 }
 ```
-### 实现原理
-具体原理并不复杂，我放到了博客上，各位老司机看下就懂了  
-https://www.cnblogs.com/yangshaoxiang/p/13517868.html
 
 ## 扩展springmvc接收json字段独立与接口参数绑定功能
 ### 诞生背景
@@ -422,7 +418,6 @@ ps:在该对象所属类中仍然可以使用上面所列注解,即是一个递�
 @DateMapping
 日期和字符串转换时使用
 ```
-这个测试，演示比较麻烦就不在这里写了，可以看[这里](https://github.com/yangshaoxiang/util)
 
 
 # 独立组件开发
