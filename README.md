@@ -176,7 +176,7 @@ ps：登陆接口是仅供参考的代码，开发时根据自己业务参考编
 对于需要登陆的接口，只需要在方法参数列表中加上 TokenUserModel 对象即可，未登录访问该接口会报错  
 对于不需要登陆的接口正常写参数列表即可  
 对于登陆和不登陆均能访问的接口，在TokenUserModel参数前 加 @Anonymous 注解即可  
-例:（com.ysx.controller.UserBaseActionController#testAnonymous）
+例:（UserBaseActionController#testAnonymous）
 ```java
     @ApiOperation(value = "登陆不登陆均可访问",notes = "登陆不登陆均可访问")
     @GetMapping("/testAnonymous")
@@ -376,7 +376,7 @@ condition： 使用 spel 表达式判断是否加锁(例如只有传入的手机
 
 因此如果在方法上直接添加 `@RedisLock` 注解,不带任何注解内的属性，由上面注解属性可知 classAndMethodJoinGenerate属性默认为true，那么加了注解的方法和 方法用 `synchronized` 修饰没有任何区别，只是一个是面向单机的，一个面向集群的,这种忽略方法参数，直接锁整个方法建议谨慎使用，最好根据方法参数加锁，降低锁的范围
 
-在举一个示例:(com.ysx.controller.UserBaseActionController#registered)
+在举一个示例:(UserBaseActionController#registered)
 ```java
     @ApiOperation(value = "用户手机号密码注册",notes = "用户手机号密码注册")
     @PostMapping("/registered")
